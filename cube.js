@@ -1,4 +1,11 @@
 const reloadtButton = document.querySelector("#reload");
+// Define the character object
+var character = {
+    x: 100,
+    y: 100,
+    width: 50,
+    height: 50
+  };
 var myGamePiece;
 var myObstacles = [];
 var myScore;
@@ -109,25 +116,39 @@ function everyinterval(n) {
     return false;
 }
 
-reloadButton.addEventListener("click", reload, false);
+// reloadButton.addEventListener("click", reload, false);
 
+document.addEventListener('keydown', function(event) {
+    switch(event.keyCode) {
+      case 37: // left arrow
+        character.x -= 10;
+        break;
+      case 38: // up arrow
+        character.y -= 10;
+        break;
+      case 39: // right arrow
+        character.x += 10;
+        break;
+      case 40: // down arrow
+        character.y += 10;
+        break;
+    }
+  });
+// function moveup() {
+//     myGamePiece.speedY = -1; 
+// }
 
-function moveup() {
-    myGamePiece.speedY = -1; 
-}
+// function movedown() {
+//     myGamePiece.speedY = 1; 
+// }
 
-function movedown() {
-    myGamePiece.speedY = 1; 
-}
+// function moveleft() {
+//     myGamePiece.speedX = -1; 
+// }
 
-function moveleft() {
-    myGamePiece.speedX = -1; 
-}
-
-function moveright() {
-    myGamePiece.speedX = 1; 
-}
-
+// function moveright() {
+//     myGamePiece.speedX = 1; 
+// }
 function clearmove() {
     myGamePiece.speedX = 0; 
     myGamePiece.speedY = 0; 
