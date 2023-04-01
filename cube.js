@@ -1,4 +1,7 @@
 const reloadtButton = document.querySelector("#reload");
+var myGamePiece;
+var myObstacles = [];
+var myScore;
 // Define the character object
 var character = {
     x: 100,
@@ -6,15 +9,34 @@ var character = {
     width: 50,
     height: 50
   };
-var myGamePiece;
-var myObstacles = [];
-var myScore;
-
-function startGame() {
+  
+  function startGame() {
     myGamePiece = new component(30, 30, "red", 10, 120);
     myScore = new component("30px", "Consolas", "black", 280, 40, "text");
+  
+    document.addEventListener('keydown', function(event) {
+      switch(event.keyCode) {
+        case 37: // left arrow
+          myGamePiece.speedX = -1;
+          break;
+        case 38: // up arrow
+          myGamePiece.speedY = -1;
+          break;
+        case 39: // right arrow
+          myGamePiece.speedX = 1;
+          break;
+        case 40: // down arrow
+          myGamePiece.speedY = 1;
+          break;
+      }
+    });
+    document.addEventListener('keyup', function(event) {
+      myGamePiece.speedX = 0;
+      myGamePiece.speedY = 0;
+    });
+  
     myGameArea.start();
-}
+  }
 
 var myGameArea = {
     canvas : document.createElement("canvas"),
@@ -116,41 +138,28 @@ function everyinterval(n) {
     return false;
 }
 
-// reloadButton.addEventListener("click", reload, false);
+reloadButton.addEventListener("click", reload, false);
 
-document.addEventListener('keydown', function(event) {
-    switch(event.keyCode) {
-      case 37: // left arrow
-        character.x -= 10;
-        break;
-      case 38: // up arrow
-        character.y -= 10;
-        break;
-      case 39: // right arrow
-        character.x += 10;
-        break;
-      case 40: // down arrow
-        character.y += 10;
-        break;
-    }
-  });
-// function moveup() {
-//     myGamePiece.speedY = -1; 
-// }
 
-// function movedown() {
-//     myGamePiece.speedY = 1; 
-// }
+function moveup() {
+    myGamePiece.speedY = -1; 
+}
 
-// function moveleft() {
-//     myGamePiece.speedX = -1; 
-// }
+function movedown() {
+    myGamePiece.speedY = 1; 
+}
 
-// function moveright() {
-//     myGamePiece.speedX = 1; 
-// }
+function moveleft() {
+    myGamePiece.speedX = -1; 
+}
+
+function moveright() {
+    myGamePiece.speedX = 1; 
+}
+
 function clearmove() {
     myGamePiece.speedX = 0; 
     myGamePiece.speedY = 0; 
 }
+
 
